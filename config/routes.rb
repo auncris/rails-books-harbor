@@ -1,15 +1,11 @@
 Rails.application.routes.draw do
-  get 'orders/new'
 
-  get 'orders/edit'
+  resources :books do
+    resources :orders, only: [:new, :create]
+  end
 
-  get 'books/new'
 
-  get 'books/show'
-
-  get 'books/index'
-
-  get 'books/edit'
+resources :orders, only: [:destroy, :edit, :update]
 
   devise_for :users
   root to: 'pages#home'
